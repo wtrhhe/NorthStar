@@ -40,8 +40,8 @@ public class Robot_Control_Gamepad extends OpMode {
          */
 
 
-        double lm_power = frondBack + turnRate;
-        double rm_power = frondBack - turnRate;
+        double lm_power = S_fB + s_t;
+        double rm_power = S_fB- s_t;
 
 
         if (lm_power > 1) {
@@ -74,7 +74,9 @@ public class Robot_Control_Gamepad extends OpMode {
 
 
         telemetry.addData("Left Pow", l_motor.getPower());
+        telemetry.addData("Left Encoder", l_motor.getCurrentPosition());
         telemetry.addData("Right Pow", r_motor.getPower());
+        telemetry.addData("Right Encoder", r_motor.getCurrentPosition());
 
 
     }
