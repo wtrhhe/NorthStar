@@ -20,7 +20,7 @@ public class TankDrivetrain extends Drivetrain{
 
         //Setup Motor directions and Encoder settings
         l_motor.setDirection(DcMotor.Direction.REVERSE);
-        r_motor.setDirection(DcMotor.Direction.REVERSE);
+        r_motor.setDirection(DcMotor.Direction.FORWARD);
 
         l_motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         r_motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

@@ -19,10 +19,14 @@ public class TankDrive extends LinearOpMode {
         double leftPower;
         double rightPower;
 
-        double drive = -gamepad1.left_stick_y;
-        double turn  =  gamepad1.right_stick_x;
-        leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-        rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+        waitForStart();
+
+        while (opModeIsActive()) {
+
+            double drive = -gamepad1.left_stick_y;
+            double turn = -gamepad1.right_stick_x;
+            leftPower = Range.clip(drive + turn, -1.0, 1.0);
+            rightPower = Range.clip(drive - turn, -1.0, 1.0);
 
             if (drive > 0) {
                 robot.l_motor.setPower(leftPower);
@@ -37,8 +41,8 @@ public class TankDrive extends LinearOpMode {
             telemetry.addData("Left Encoder", robot.l_motor.getCurrentPosition());
             telemetry.addData("Right Pow", robot.r_motor.getPower());
             telemetry.addData("Right Encoder", robot.r_motor.getCurrentPosition());
-
-
         }
+
+    }
 }
 
