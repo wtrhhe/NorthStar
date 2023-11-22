@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 /**
  * This is an Auto Driving the Robot and during the presentation for explaining the possibilities of Robot
@@ -10,9 +10,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 
-@Autonomous(name="Robot: Autonomous", group="Robot")
+@Autonomous(name="AutoRedAlliance", group="Robot")
 @Disabled
-public class RobotAutoDriveToLine_Linear extends LinearOpMode {
+public class AutoRedAlliance extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor leftDrive = null;
