@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode.Drivetrain;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 public class TankDrivetrain extends Drivetrain{
     public DcMotor l_motor = null;
@@ -34,6 +32,46 @@ public class TankDrivetrain extends Drivetrain{
     public void Stop(){
         l_motor.setPower(0);
         r_motor.setPower(0);
+    }
+
+    public void encoderDrive(){
+        return;
+    }
+
+    public void pointToTarget(double tagBearing, double gain) {
+        // Calculate the turning power based on the proportional controller
+        double turningPower = tagBearing * gain;
+
+        // Apply the turning power to the motors
+        l_motor.setPower(-turningPower);  // Adjust signs based on motor orientation
+        r_motor.setPower(turningPower);
+    }
+
+    public void encoderDrive(int leftTarget, int rightTarget, double speed) {
+        // Ensure that the motors are in the correct mode
+        l_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        r_motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // Set the target positions for both motors
+        l_motor.setTargetPosition(leftTarget);
+        r_motor.setTargetPosition(rightTarget);
+
+        // Set the desired speed for both motors
+        l_motor.setPower(speed);
+        r_motor.setPower(speed);
+
+        // Wait until both motors reach their target positions
+        while (l_motor.isBusy() && r_motor.isBusy()) {
+            // You can add additional logic or conditions here if needed
+        }
+
+        // Stop the motors after reaching the target positions
+        l_motor.setPower(0);
+        r_motor.setPower(0);
+
+        // Set the motors back to the original mode
+        l_motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        r_motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
 }

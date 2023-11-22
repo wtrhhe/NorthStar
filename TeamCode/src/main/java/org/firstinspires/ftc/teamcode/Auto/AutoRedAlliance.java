@@ -10,33 +10,26 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 
+import org.firstinspires.ftc.teamcode.Drivetrain.TankDrivetrain;
+
 @Autonomous(name="AutoRedAlliance", group="Robot")
 @Disabled
 public class AutoRedAlliance extends LinearOpMode {
 
-    /* Declare OpMode members. */
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
-    NormalizedColorSensor colorSensor;
+    public TankDrivetrain robot = new TankDrivetrain();
 
     static final double WHITE_THRESHOLD = 0.5;
     static final double APPROACH_SPEED = 0.25;
 
     @Override
     public void runOpMode() {
+//initialize hardware map
+        robot.init(hardwareMap);
 
-        leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        double leftPower;
+        double rightPower;
 
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
-
-        colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color");
-
-
-        leftDrive.setPower(1);
-        rightDrive.setPower(1);
-
+        waitForStart();
         resetRuntime();
 
         while(opModeIsActive() && getRuntime() < 5000) {
@@ -45,16 +38,16 @@ public class AutoRedAlliance extends LinearOpMode {
 
         }
 
-        leftDrive.setPower(0);
-        rightDrive.setPower(0);
+        robot.l_motor.setPower(0);
+        robot.r_motor.setPower(0);
         sleep(1000);
 
-        leftDrive.setPower(-0.5);
-        rightDrive.setPower(0.5);
+        robot.l_motor.setPower(-0.5);
+        robot.r_motor.setPower(-0.5);
         resetRuntime();
 
-        leftDrive.setPower(0.5);
-        rightDrive.setPower(-0.5);
+        robot.l_motor.setPower(0.5);
+        robot.r_motor.setPower(-0.5);
         resetRuntime();
 
         while(opModeIsActive() && getRuntime() < 3000) {
@@ -62,12 +55,12 @@ public class AutoRedAlliance extends LinearOpMode {
             telemetry.update();
         }
 
-        leftDrive.setPower(0);
-        rightDrive.setPower(0);
+        robot.l_motor.setPower(0);
+        robot.r_motor.setPower(0);
         sleep(1000);
 
-        leftDrive.setPower(1);
-        rightDrive.setPower(0.2);
+        robot.r_motor.setPower(0);
+        robot.r_motor.setPower(0);
 
     }
 }
