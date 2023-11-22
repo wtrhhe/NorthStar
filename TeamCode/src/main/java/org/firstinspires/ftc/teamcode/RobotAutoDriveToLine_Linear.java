@@ -34,8 +34,8 @@ public class RobotAutoDriveToLine_Linear extends LinearOpMode {
         colorSensor = hardwareMap.get(NormalizedColorSensor.class, "sensor_color");
 
 
-        leftDrive.setPower(0.5);
-        rightDrive.setPower(0.5);
+        leftDrive.setPower(1);
+        rightDrive.setPower(1);
 
         resetRuntime();
 
@@ -65,6 +65,9 @@ public class RobotAutoDriveToLine_Linear extends LinearOpMode {
         leftDrive.setPower(0);
         rightDrive.setPower(0);
         sleep(1000);
+
+        leftDrive.setPower(1);
+        rightDrive.setPower(0.2);
 
     }
 }
