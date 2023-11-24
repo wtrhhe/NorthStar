@@ -4,17 +4,20 @@ package org.firstinspires.ftc.teamcode.Auto;
  * This is an Auto Driving the Robot and during the presentation for explaining the possibilities of Robot
  */
 
+import static java.lang.Runtime.*;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Drivetrain.TankDrivetrain;
 
 @Autonomous(name="AutoRedAlliance", group="Robot")
-@Disabled
 public class AutoRedAlliance extends LinearOpMode {
+
+    private ElapsedTime runtime = new ElapsedTime();
 
     public TankDrivetrain robot = new TankDrivetrain();
 
@@ -32,35 +35,34 @@ public class AutoRedAlliance extends LinearOpMode {
         waitForStart();
         resetRuntime();
 
-        while(opModeIsActive() && getRuntime() < 5000) {
-            telemetry.addData("moving forward", "");
-            telemetry.update();
+        robot.encoderDrive(700, 700, 0.2);
 
-        }
 
-        robot.l_motor.setPower(0);
-        robot.r_motor.setPower(0);
-        sleep(1000);
 
-        robot.l_motor.setPower(-0.5);
-        robot.r_motor.setPower(-0.5);
-        resetRuntime();
 
-        robot.l_motor.setPower(0.5);
-        robot.r_motor.setPower(-0.5);
-        resetRuntime();
 
-        while(opModeIsActive() && getRuntime() < 3000) {
-            telemetry.addData("turning left", "");
-            telemetry.update();
-        }
+//        while (opModeIsActive() && runtime.milliseconds() < 1000){
+//           robot.debug();
+//            telemetry.addData("Runtime", runtime.milliseconds());
+//            telemetry.addData("Encoder left", robot.l_motor.getCurrentPosition());
+//            telemetry.addData("Encoder right", robot.r_motor.getCurrentPosition());
+//            telemetry.addData("Servo Encoder 1", robot.claw1.getPosition());
+//            telemetry.addData("Servo Encoder 2", robot.claw2.getPosition());
+//            telemetry.update();
+//
+//        }
 
-        robot.l_motor.setPower(0);
-        robot.r_motor.setPower(0);
-        sleep(1000);
 
-        robot.r_motor.setPower(0);
-        robot.r_motor.setPower(0);
+//        while (opModeIsActive() && runtime.milliseconds() < 2000){
+//            telemetry.addData("Runtime", runtime.milliseconds());
+//            telemetry.addData("Encoder left", robot.l_motor.getCurrentPosition());
+//            telemetry.addData("Encoder right", robot.r_motor.getCurrentPosition());
+//            telemetry.addData("Servo Encoder 1", robot.claw1.getPosition());
+//            telemetry.addData("Servo Encoder 2", robot.claw2.getPosition());
+//            telemetry.update();
+//
+//        }
+//        resetRuntime();
 
     }
 }
