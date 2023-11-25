@@ -130,16 +130,18 @@ public class CameraWork extends LinearOpMode
             robot.larm.setTargetPosition(500);
             //robot.rarm.setPosition(0.20);
             if (currentGamepad2.right_bumper && !previousGamepad2.right_bumper){
-                isRight = !isRight;}
+                isRed = !isRed;}
 
-            if (isRight){park = Side.Right;}  else{ park = Side.Left;}
+            if (isRed){color = Alliance.Red;}  else{ color = Alliance.Blue;}
 
             if (currentGamepad1.right_bumper && !previousGamepad1.right_bumper){
                 isRight = !isRight;}
 
             if (isRight){park = Side.Right;}  else{ park = Side.Left;}
 
+            telemetry.addData("Alliance",color);
             telemetry.addData("Side",park);
+
             telemetry.update();
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
 
@@ -169,6 +171,7 @@ public class CameraWork extends LinearOpMode
                     if(tagOfInterest == null)
                     {
                         telemetry.addLine("(The tag has never been seen)");
+                        telemetry.addData("Alliance",color);
                         telemetry.addData("Side",park);
                     }
                     else
@@ -186,6 +189,7 @@ public class CameraWork extends LinearOpMode
                 if(tagOfInterest == null)
                 {
                     telemetry.addLine("(The tag has never been seen)");
+                    telemetry.addData("Alliance",color);
                     telemetry.addData("Side",park);
                 }
                 else
@@ -215,12 +219,13 @@ public class CameraWork extends LinearOpMode
         else
         {
             telemetry.addLine("No tag snapshot available, it was never sighted during the init loop :(");
+            telemetry.addData("Alliance",color);
             telemetry.addData("Side",park);
             telemetry.update();
         }
 
 
-        if(tagOfInterest == null || tagOfInterest.id == Left ){
+        if(tagOfInterest == null || tagOfInterest.id == Left  ){
             //trajectory for LEFT
             telemetry.clear();
             sleep(500);          //wait half a second
